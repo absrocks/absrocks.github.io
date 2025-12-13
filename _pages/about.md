@@ -5,7 +5,7 @@ permalink: /
 subtitle: Research Computing Facilitator at <a href='https://www.njit.edu'>New Jersey Institute of Technology</a>
 
 profile:
-  align: right
+  align: left
   image: bio-self.jpg
   image_circular: true # crops the image to make it circular
   more_info: >
