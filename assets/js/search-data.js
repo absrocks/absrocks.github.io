@@ -44,13 +44,6 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/al-folio/teaching/";
           },
-        },{id: "nav-submenus",
-          title: "submenus",
-          description: "",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/al-folio/_pages/dropdown.html";
-          },
         },{id: "post-a-post-with-plotly-js",
         
           title: "a post with plotly.js",
