@@ -406,9 +406,9 @@ ninja.data = [{
           description: "Completed in 2023",
           section: "Projects",handler: () => {
               window.location.href = "/al-folio/projects/1_project.html";
-            },},{id: "projects-project-2",
-          title: 'project 2',
-          description: "a project with a background image and giscus comments",
+            },},{id: "projects-cfd-analysis-to-study-the-drag-force-of-blue-whale",
+          title: 'CFD analysis to study the drag force of blue whale',
+          description: "Completed: 2023",
           section: "Projects",handler: () => {
               window.location.href = "/al-folio/projects/2_project.html";
             },},{id: "projects-project-3-with-very-long-name",
