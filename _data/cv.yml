@@ -12,7 +12,7 @@
   type: time_table
   contents:
     - title: Research Computing Facilitator
-      institution: [New Jersey Institute of Technology, NJ](https://www.njit.edu)
+      institution: New Jersey Institute of Technology, NJ, US
       year: 2023–Present
       description:
         - title: Research Support
@@ -29,12 +29,12 @@
             - Understand and convey current trends in research computing technology to the user community.
             - Write user guides, information material, and other documentation.
             - Run workshops on SLURM usage, containerization via Apptainer, Conda create and manage environments, debug software/library, compilation of software packages, etc.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+    - title: Adjunct Instructor
+      institution: New Jersey Institute of Technology, NJ, US
+      year: 2023–2024
       description:
-        - Description 1.
-        - Description 2.
+        - Delivered engaging lectures on core concepts of computer-aided design, including 2D and 3D modeling, parametric design, and assembly modeling.
+        - Conducted hands-on demonstrations using CAD software (e.g., Creo Parametric, Creo Simulate, SolidWorks, & Solidworks Simulate).
 
     - title: Director
       institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
