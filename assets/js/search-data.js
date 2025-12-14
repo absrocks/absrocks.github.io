@@ -9,14 +9,7 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/al-folio/";
     },
-  },{id: "nav-publications",
-          title: "Publications",
-          description: "List of publications with links",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/al-folio/publications/";
-          },
-        },{id: "nav-projects",
+  },{id: "nav-projects",
           title: "Projects",
           description: "Here are my list of projects",
           section: "Navigation",
@@ -30,12 +23,12 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/al-folio/repositories/";
           },
-        },{id: "nav-cv",
-          title: "CV",
-          description: "Download the CV from the right corner.",
+        },{id: "nav-publications",
+          title: "Publications",
+          description: "List of publications with links",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/al-folio/cv/";
+            window.location.href = "/al-folio/publications/";
           },
         },{id: "nav-teaching",
           title: "Teaching",
@@ -43,6 +36,13 @@ ninja.data = [{
           section: "Navigation",
           handler: () => {
             window.location.href = "/al-folio/teaching/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Download the CV from the right corner.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/al-folio/cv/";
           },
         },{id: "post-a-post-with-plotly-js",
         
