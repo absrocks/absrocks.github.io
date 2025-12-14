@@ -7,9 +7,6 @@
     "url": "https://absrocks.github.io/al-folio/",
     "summary": "Experienced in managing high-performance computing environments, with a strong background in\nHPC software installation, system troubleshooting, and providing solutions for efficient computational\ntasks. ",
     "location": {
-      "address": "GITC, University Heights",
-      "postalCode": "07102",
-      "city": "Newark",
       "countryCode": "US",
       "region": "New Jersey"
     },
@@ -23,11 +20,11 @@
   },
   "work": [
     {
-      "name": "Institute for Advanced Study, Princeton University",
-      "position": "Professor of Theoretical Physics",
-      "url": "https://example.com",
-      "startDate": "1933-01-01",
-      "endDate": "1955-01-01",
+      "name": "New Jersey Institute of Technology",
+      "position": "Research Computing Facilitator",
+      "url": "https://people.njit.edu/profile/am2455",
+      "startDate": "2023-02-20",
+      "endDate": "Present",
       "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
       "highlights": ["Relativity"]
     }
