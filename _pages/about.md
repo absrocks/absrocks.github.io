@@ -9,8 +9,8 @@ profile:
   image: bio-self.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>5400 GITC <br></p>
-    <p>Newark, NJ 07102, US</p>
+    <p>5400 GITC, Newark <br></p>
+    <p>NJ 07102, US</p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
