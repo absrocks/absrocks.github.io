@@ -3,8 +3,10 @@
   contents:
     - name: Full Name
       value: Abhishek Mukherjee
-    - name: Languages
-      value: English, Bengali, Hindi
+    - name: Summary
+      value: Research Computing Facilitator | CFD Scientist
+    - name: Location
+      value: New Jersey, US
 
 - title: Experience
   type: time_table
