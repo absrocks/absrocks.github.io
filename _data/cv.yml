@@ -30,7 +30,7 @@
             - Write user guides, information material, and other documentation.
             - Run workshops on SLURM usage, containerization via Apptainer, Conda create and manage environments, debug software/library, compilation of software packages, etc.
     - title: Adjunct Instructor
-      institution: New Jersey Institute of Technology, NJ, US
+      institution: <a href="https://njit.edu">New Jersey Institute of Technology, NJ, US</a>
       year: 2023–2024
       description:
         - Delivered engaging lectures on core concepts of computer-aided design, including 2D and 3D modeling, parametric design, and assembly modeling.
@@ -40,17 +40,17 @@
   type: time_table
   contents:
     - title: PhD
-      institution: New Jersey Institute of Technology, NJ, US
+      institution: <a href="https://njit.edu">New Jersey Institute of Technology, NJ, US</a>
       year: 2023
       description:
-        - Importance of Vegetation in Tsunami Mitigation Evidence from Large Eddy Simulations with Fluid-Structure Interactions
+        - "Importance of Vegetation in Tsunami Mitigation Evidence from Large Eddy Simulations with Fluid-Structure Interactions"
     - title: M.E. in Mechanical Engineering
-      institution: Jadavpur University, Kolkata, India
+      institution: <a href="http://www.jaduniv.edu.in">Jadavpur University, Kolkata, India</a>
       description:
         - Transient Study of Natural Convection in an Alternately Heated Square Enclosure
       year: 2014
     - title: B.Tech in Mechanical Engineering
-      institution: Kalyani Government Engineering College, Kalyani, India
+      institution: <a href="http://www.jaduniv.edu.in/">Kalyani Government Engineering College, Kalyani, India</a>
       year: 2011
 
 - title: Open Source Projects
