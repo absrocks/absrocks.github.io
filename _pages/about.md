@@ -10,7 +10,6 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>5400 GITC</p>
-    <p>154 Summit Street</p>
     <p>Newark, NJ 07102</p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
