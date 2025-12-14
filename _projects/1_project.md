@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Role of coastal vegetation on tsunami energy attenuation
-description: with background image
+description: Completed in 2023
 img: assets/img/flex-double-5e4-SP1.5D.gif
 importance: 1
 category: work
