@@ -403,7 +403,7 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-role-of-coastal-vegetation-on-tsunami-energy-attenuation",
           title: 'Role of coastal vegetation on tsunami energy attenuation',
-          description: "with background image",
+          description: "Completed in 2023",
           section: "Projects",handler: () => {
               window.location.href = "/al-folio/projects/1_project.html";
             },},{id: "projects-project-2",
