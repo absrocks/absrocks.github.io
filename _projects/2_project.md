@@ -1,7 +1,7 @@
 ---
 layout: page
 title: CFD analysis to study the drag force of blue whale
-description: "Completed: 2023"
+description: "Completed: 2020"
 img: assets/img/vel_profile.png
 importance: 2
 category: work
