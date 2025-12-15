@@ -4,36 +4,40 @@ layout: default
 {% assign s = site.data.scholar_profile.scholar %}
 {% assign ts = site.data.citations_last5y %}
 
-<h3>Google Scholar Metrics</h3>
+<div class="scholar-widget my-3" style="max-width: 520px; font-size: 0.9rem;">
+  <h4 style="margin-bottom: 0.5rem;">Google Scholar</h4>
 
-<table class="table table-sm">
-  <thead>
-    <tr>
-      <th></th>
-      <th>All</th>
-      <th>Since {{ s.since_year }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Citations</td>
-      <td>{{ s.all.citations }}</td>
-      <td>{{ s.since.citations }}</td>
-    </tr>
-    <tr>
-      <td>h-index</td>
-      <td>{{ s.all.h_index }}</td>
-      <td>{{ s.since.h_index }}</td>
-    </tr>
-    <tr>
-      <td>i10-index</td>
-      <td>{{ s.all.i10_index }}</td>
-      <td>{{ s.since.i10_index }}</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-sm" style="margin-bottom: 0.75rem;">
+    <thead>
+      <tr>
+        <th></th>
+        <th>All</th>
+        <th>Since {{ s.since_year }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Citations</td>
+        <td>{{ s.all.citations }}</td>
+        <td>{{ s.since.citations }}</td>
+      </tr>
+      <tr>
+        <td>h-index</td>
+        <td>{{ s.all.h_index }}</td>
+        <td>{{ s.since.h_index }}</td>
+      </tr>
+      <tr>
+        <td>i10-index</td>
+        <td>{{ s.all.i10_index }}</td>
+        <td>{{ s.since.i10_index }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<canvas id="scholarCites5y"></canvas>
+  <div style="height: 180px;">
+    <canvas id="scholarCites5y"></canvas>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -45,8 +49,33 @@ layout: default
     type: "bar",
     data: {
       labels: years,
-      datasets: [{ label: "Citations (last 5 years)", data: cites }]
+      datasets: [{
+        label: "Citations (last 5 years)",
+        data: cites,
+        backgroundColor: "#808080",
+        borderColor: "#808080",
+        borderWidth: 1
+      }]
     },
-    options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    options: {
+      responsive: true,
+      maintainAspectRatio: false, // allows the fixed small height
+      plugins: {
+        legend: { display: false } // hide legend to save space
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 }
+        }
+      }
+    }
   });
 </script>
+{% include bib_search.liquid %}
+
+<div class="publications">
+
+{% bibliography %}
+
+</div>
