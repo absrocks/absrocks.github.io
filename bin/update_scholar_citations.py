@@ -126,7 +126,6 @@ def write_scholar_profile_and_timeseries() -> None:
         "since_year": cutoff_year,
         "years": years,
         "citations": values,
-
     }
     try:
         with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
