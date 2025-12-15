@@ -2,7 +2,7 @@
 
 import os
 import sys
-import yaml
+import yaml, json
 from datetime import datetime
 from scholarly import scholarly
 
@@ -34,8 +34,70 @@ def load_scholar_user_id() -> str:
 
 SCHOLAR_USER_ID: str = load_scholar_user_id()
 OUTPUT_FILE: str = "_data/citations.yml"
+OUTPUT_PROFILE: str = "_data/scholar_profile.yml"
+OUTPUT_JSON: str = "_data/citations_last5y.json"
 
+def write_scholar_profile_and_timeseries() -> None:
+    scholarly.set_timeout(15)
+    scholarly.set_retries(3)
+    try:
+        author = scholarly.search_author_id(SCHOLAR_USER_ID)
+    except Exception as e:
+        print(
+            f"Error fetching author data from Google Scholar for user ID '{SCHOLAR_USER_ID}': {e}. Please check your internet connection and Scholar user ID."
+        )
+        sys.exit(1)
+    now_year = datetime.utcnow().year
+    cutoff_year = now_year - 5
+    cited_all = int(author.get("citedby", 0) or 0)
+    cited_5y = int(scholarly.fill(author, sections=['basics', 'indices']).get("citedby5y") or 0)
+    h_all = int(author.get("hindex", 0) or 0)
+    h_5y = int(scholarly.fill(author, sections=['basics', 'indices']).get("hindex5y", 0) or 0)
+    i10_all = int(author.get("i10index", 0) or 0)
+    i10_5y = int(scholarly.fill(author, sections=['basics', 'indices']).get("i10index5y", 0) or 0)
+    author = scholarly.fill(author, sections=["indices", "counts"])
+    cites_per_year = author.get("cites_per_year") or {}
 
+    years = list(range(now_year - 4, now_year + 1))  # last 5 years inclusive
+    values = [int(cites_per_year.get(y, 0) or 0) for y in years]
+    citation_data = {
+        "scholar": {
+            "since_year": cutoff_year,
+            "all": {
+                "citations": cited_all,
+                "h_index": h_all,
+                "i10_index": i10_all,
+            },
+            "since": {
+                "citations": cited_5y,
+                "h_index": h_5y,
+                "i10_index": i10_5y,
+            },
+        }
+    }
+    try:
+        with open(OUTPUT_PROFILE, "w") as f:
+            yaml.dump(citation_data, f, width=1000, sort_keys=False)
+        print(f"Citation data saved to {OUTPUT_PROFILE}")
+    except Exception as e:
+        print(
+            f"Error writing citation data to {OUTPUT_PROFILE}: {e}. Please check file permissions and disk space."
+        )
+        sys.exit(1)
+    payload = {
+        "since_year": cutoff_year,
+        "years": years,
+        "citations": values,
+    }
+    try:
+        with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2)
+        print(f"Citation data saved to {OUTPUT_JSON}")
+    except Exception as e:
+        print(
+            f"Error writing citation data to {OUTPUT_JSON}: {e}. Please check file permissions and disk space."
+        )
+        sys.exit(1)
 def get_scholar_citations() -> None:
     """Fetch and update Google Scholar citation data."""
     print(f"Fetching citations for Google Scholar ID: {SCHOLAR_USER_ID}")
@@ -127,6 +189,7 @@ def get_scholar_citations() -> None:
 if __name__ == "__main__":
     try:
         get_scholar_citations()
+        write_scholar_profile_and_timeseries()
     except Exception as e:
         print(f"Unexpected error: {e}")
         sys.exit(1)

@@ -1,0 +1,52 @@
+---
+layout: default
+---
+{% assign s = site.data.scholar_profile.scholar %}
+{% assign ts = site.data.citations_last5y %}
+
+<h3>Google Scholar Metrics</h3>
+
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th></th>
+      <th>All</th>
+      <th>Since {{ s.since_year }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Citations</td>
+      <td>{{ s.all.citations }}</td>
+      <td>{{ s.since.citations }}</td>
+    </tr>
+    <tr>
+      <td>h-index</td>
+      <td>{{ s.all.h_index }}</td>
+      <td>{{ s.since.h_index }}</td>
+    </tr>
+    <tr>
+      <td>i10-index</td>
+      <td>{{ s.all.i10_index }}</td>
+      <td>{{ s.since.i10_index }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<canvas id="scholarCites5y"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const years = {{ ts.years | jsonify }};
+  const cites = {{ ts.citations | jsonify }};
+
+  const ctx = document.getElementById("scholarCites5y").getContext("2d");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: years,
+      datasets: [{ label: "Citations (last 5 years)", data: cites }]
+    },
+    options: { responsive: true, scales: { y: { beginAtZero: true } } }
+  });
+</script>
