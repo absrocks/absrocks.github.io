@@ -9,6 +9,7 @@ profile:
   image: bio-self.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
+    <p>Research Computing Facilitator <br></p>
     <p>5400 GITC, Newark <br></p>
     <p>NJ 07102, US</p>
 
@@ -27,3 +28,4 @@ latest_posts:
 ---
 
 Hello, I am currently working as a Research Computing Facilitator at [NJIT](https://njit.edu) [High Performance Computing](https://hpc.njit.edu). I specialize in HPC software installation and the management of large-scale computational environments, with a strong emphasis on system health monitoring, software debugging, and performance optimization.
+I am a computational fluid dynamics scientist by training. I obtained my Ph.D. from the [New Jersey Institute of Technology](https://hpc.njit.edu) under the supervision of Dr. [Simone Marras](https://web.njit.edu/~smarras/). My primary research focus includes geophysical flows, large eddy simulation (LES), fluid–structure interaction (FSI), and computational heat transfer, with an emphasis on high-performance computing–based simulations.
