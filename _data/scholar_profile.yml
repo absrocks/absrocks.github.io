@@ -1,12 +1,12 @@
 metadata:
-  last_updated: "2025-12-15"
+  last_updated: '2026-01-09'
 scholar:
-  since_year: 2020
+  since_year: 2021
   all:
-    citations: 60
+    citations: 62
     h_index: 3
     i10_index: 3
   since:
-    citations: 60
+    citations: 58
     h_index: 3
     i10_index: 3
