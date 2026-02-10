@@ -3,8 +3,8 @@ layout: page
 permalink: /repositories/
 title: Repositories
 description: See the list of repositories contributed by Abhishek
-nav: true
-nav_order: 3
+#nav: true
+#nav_order: 3
 ---
 
 {% if site.data.repositories.github_users %}
