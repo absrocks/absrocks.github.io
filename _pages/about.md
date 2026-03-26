@@ -6,7 +6,7 @@ subtitle: Research Computing Facilitator at <a href='https://www.njit.edu'>New J
 
 profile:
   align: right
-  image: bio-self.jpg
+  image: bio-self.png
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Research Computing Facilitator </p>
