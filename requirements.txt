@@ -1,3 +1,6 @@
 nbconvert
 pyyaml
 scholarly
+# scholarly 1.x still imports the bibtexparser 1.x API (bibtexparser.bibdatabase);
+# bibtexparser 2.x removed it and breaks `import scholarly`.
+bibtexparser<2
