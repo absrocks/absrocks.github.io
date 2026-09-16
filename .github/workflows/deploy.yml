@@ -59,23 +59,13 @@ on:
       - "!FAQ.md"
       - "!INSTALL.md"
       - "!README.md"
-  workflow_dispatch:
-  # Pushes made with GITHUB_TOKEN (e.g. the citations bot commit) do not fire
-  # `push` events, so rebuild explicitly after the citation workflow finishes.
-  workflow_run:
-    workflows: ["Update Google Scholar Citations"]
-    types: [completed]
-    branches:
-      - master
-      - main
+  workflow_dispatch: # also dispatched by update-citations.yml after a data change
 
 permissions:
   contents: write
 
 jobs:
   deploy:
-    # For workflow_run triggers, only deploy if the citation update succeeded.
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     # available images: https://github.com/actions/runner-images#available-images
     runs-on: ubuntu-latest
     steps:

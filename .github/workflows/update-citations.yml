@@ -1,13 +1,17 @@
 name: Update Google Scholar Citations
 
+# Google Scholar throttles requests from GitHub's datacenter IPs, so any single
+# attempt may fail. The script is a no-op once it has succeeded on a given day
+# (it checks metadata.last_updated), so a daily schedule just means "keep trying
+# until one attempt gets through this week".
 on:
   schedule:
-    - cron: "0 0 * * 0" # weekly, Sunday 00:00 UTC
+    - cron: "23 4 * * *" # daily 04:23 UTC (off the hour: top-of-hour crons get delayed/dropped)
   workflow_dispatch:
 
-# Needed so the job can push the updated data files back to the repo.
 permissions:
-  contents: write
+  contents: write # push the updated data files
+  actions: write # dispatch the Deploy site workflow
 
 jobs:
   update-citations:
@@ -15,12 +19,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
+          cache: "pip"
 
       - name: Install dependencies
         run: |
@@ -41,6 +46,10 @@ jobs:
           if [ $status -eq 0 ]; then
             echo "✅ Citation update succeeded (started at $start_time, ended at $end_time)."
             echo "✅ Citation update succeeded." >> $GITHUB_STEP_SUMMARY
+          elif [ $status -eq 124 ]; then
+            echo "❌ Citation update timed out after 300s (started at $start_time). Google Scholar is most likely throttling this runner's IP; the next scheduled attempt will retry from a different runner."
+            echo "❌ Citation update timed out (Scholar throttling this runner). Will retry on the next scheduled run." >> $GITHUB_STEP_SUMMARY
+            exit $status
           else
             echo "❌ Citation update script failed with exit code $status (started at $start_time, ended at $end_time)."
             echo "❌ Citation update script failed with exit code $status." >> $GITHUB_STEP_SUMMARY
@@ -48,6 +57,7 @@ jobs:
           fi
 
       - name: Commit and push if changed
+        id: commit
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
@@ -57,10 +67,23 @@ jobs:
           if git diff --staged --quiet; then
             echo "ℹ️ Citation data unchanged; nothing to commit."
             echo "ℹ️ Citation data unchanged; nothing to commit." >> $GITHUB_STEP_SUMMARY
+            echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "📤 Committing and pushing changes..."
             git diff --staged --stat
             git commit -m "Update Google Scholar citations"
             git push
-            echo "✅ Citation data updated and pushed. Site deploy will follow via the Deploy site workflow." >> $GITHUB_STEP_SUMMARY
+            echo "✅ Citation data updated and pushed." >> $GITHUB_STEP_SUMMARY
+            echo "changed=true" >> $GITHUB_OUTPUT
           fi
+
+      # Pushes made with GITHUB_TOKEN do not fire `push` events, so deploy.yml
+      # would never see the commit above. workflow_dispatch is the documented
+      # exception to that rule, so trigger it explicitly.
+      - name: Trigger site deploy
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run deploy.yml --ref "${{ github.ref_name }}"
+          echo "🚀 Deploy site workflow dispatched." >> $GITHUB_STEP_SUMMARY

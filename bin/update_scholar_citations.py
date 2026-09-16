@@ -83,15 +83,21 @@ def write_scholar_profile_and_timeseries() -> None:
             f"Error fetching author data from Google Scholar for user ID '{SCHOLAR_USER_ID}': {e}. Please check your internet connection and Scholar user ID."
         )
         sys.exit(1)
-    now_year = datetime.utcnow().year
+    # One fill for everything: each extra request is another chance to be
+    # throttled by Scholar when running from a datacenter IP.
+    try:
+        author = scholarly.fill(author, sections=["basics", "indices", "counts"])
+    except Exception as e:
+        print(f"Error filling author profile for user ID '{SCHOLAR_USER_ID}': {e}.")
+        sys.exit(1)
+    now_year = datetime.now().year
     cutoff_year = now_year - 5
     cited_all = int(author.get("citedby", 0) or 0)
-    cited_5y = int(scholarly.fill(author, sections=['basics', 'indices']).get("citedby5y") or 0)
+    cited_5y = int(author.get("citedby5y", 0) or 0)
     h_all = int(author.get("hindex", 0) or 0)
-    h_5y = int(scholarly.fill(author, sections=['basics', 'indices']).get("hindex5y", 0) or 0)
+    h_5y = int(author.get("hindex5y", 0) or 0)
     i10_all = int(author.get("i10index", 0) or 0)
-    i10_5y = int(scholarly.fill(author, sections=['basics', 'indices']).get("i10index5y", 0) or 0)
-    author = scholarly.fill(author, sections=["indices", "counts"])
+    i10_5y = int(author.get("i10index5y", 0) or 0)
     cites_per_year = author.get("cites_per_year") or {}
 
     years = list(range(now_year - 4, now_year + 1))  # last 5 years inclusive
